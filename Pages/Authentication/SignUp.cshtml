@@ -1,0 +1,18 @@
+@page
+@model SecureClicker.Pages.Authentication.SignUp
+
+<h1>Sign Up</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Username">Username</label>
+        <input asp-for="Username" />
+    </div>
+
+    <div>
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" />
+    </div>
+
+    <button type="submit">Sign Up</button>
+</form>

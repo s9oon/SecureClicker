@@ -10,6 +10,7 @@ public class ApplicationModelConfiguration
 {
     public void Configure(EntityTypeBuilder<ProfileApplicationData> builder)
     {
+        // Configure ProfileApplicationData Model here
         builder.HasKey(x => x.Id);
 
         builder.HasOne<IdentityUser>()

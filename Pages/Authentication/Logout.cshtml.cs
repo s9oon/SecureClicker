@@ -15,6 +15,7 @@ public class Logout : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        // Add Asyncronous logic to logout button here
         await _signInManager.SignOutAsync();
 
         return Redirect("/Authentication/Login");

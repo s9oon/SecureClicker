@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SecureClicker.Data;
-using SecureClicker.Data.Models;
 
 namespace SecureClicker.Pages;
 
@@ -29,6 +28,8 @@ public class ProfileModel : PageModel
     }
     public async Task<IActionResult> OnPostClickAsync()
     {
+        // Add Asyncronous logic to click button here
+
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         var profile = await _context.ProfileApplicationData.FindAsync(userId);

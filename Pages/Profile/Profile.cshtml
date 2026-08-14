@@ -12,27 +12,56 @@
 @Html.AntiForgeryToken()
 
 <script>
+    let clicks = @Model.Clicks;
+    let unsavedClicks = 0;
+
     const button = document.getElementById("clickButton");
     const clickCount = document.getElementById("clickCount");
-    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+    const token = document.querySelector(
+        'input[name="__RequestVerificationToken"]'
+    ).value;
 
-    button.addEventListener("click", async () => {
-        const response = await fetch("?handler=Click", {
+    // Clicking only changes the local JavaScript state
+    button.addEventListener("click", () => {
+        clicks++;
+        unsavedClicks++;
+
+        clickCount.textContent = clicks;
+    });
+
+    // Save accumulated clicks every 15 seconds
+    setInterval(async () => {
+        if (unsavedClicks === 0) {
+            return;
+        }
+
+        const clicksToSave = unsavedClicks;
+
+        const response = await fetch("?handler=SaveClicks", {
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "RequestVerificationToken": token
-            }
+            },
+            body: JSON.stringify({
+                clicks: clicksToSave
+            })
         });
 
         if (!response.ok) {
-            console.error("Failed to save click.");
+            console.error("Failed to save clicks.");
             return;
         }
 
         const data = await response.json();
 
-        clickCount.textContent = data.clicks;
-    });
+        // Only reset after the server successfully saved them
+        unsavedClicks = 0;
+        clicks = data.clicks;
+
+        clickCount.textContent = clicks;
+
+    }, 15000);
 </script>
 
 <form method="post" asp-page="/Authentication/Logout">

@@ -26,10 +26,10 @@ public class ProfileModel : PageModel
 
         Clicks = profile?.Clicks ?? 0;
     }
-    public async Task<IActionResult> OnPostClickAsync()
-    {
-        // Add Asyncronous logic to click button here
 
+    public async Task<IActionResult> OnPostSaveClicksAsync(
+        [FromBody] ClickRequest request)
+    {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         var profile = await _context.ProfileApplicationData.FindAsync(userId);
@@ -39,7 +39,7 @@ public class ProfileModel : PageModel
             return NotFound();
         }
 
-        profile.Clicks++;
+        profile.Clicks += request.Clicks;
 
         await _context.SaveChangesAsync();
 
@@ -47,5 +47,10 @@ public class ProfileModel : PageModel
         {
             clicks = profile.Clicks
         });
+    }
+
+    public class ClickRequest
+    {
+        public int Clicks { get; set; }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureClicker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e706dbabdd51159d431fa01912c021f76c1b254")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+264b0d7776931e0be000d9e965b34d6f3db11239")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureClicker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureClicker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

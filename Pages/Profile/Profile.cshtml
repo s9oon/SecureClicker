@@ -1,0 +1,40 @@
+@page "/Profile"
+@model SecureClicker.Pages.ProfileModel
+
+<h1>Profile</h1>
+
+<p>Clicks: <span id="clickCount">@Model.Clicks</span></p>
+
+<button type="button" id="clickButton">
+    Click!
+</button>
+
+@Html.AntiForgeryToken()
+
+<script>
+    const button = document.getElementById("clickButton");
+    const clickCount = document.getElementById("clickCount");
+    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+    button.addEventListener("click", async () => {
+        const response = await fetch("?handler=Click", {
+            method: "POST",
+            headers: {
+                "RequestVerificationToken": token
+            }
+        });
+
+        if (!response.ok) {
+            console.error("Failed to save click.");
+            return;
+        }
+
+        const data = await response.json();
+
+        clickCount.textContent = data.clicks;
+    });
+</script>
+
+<form method="post" asp-page="/Authentication/Logout">
+    <button type="submit">Logout</button>
+</form>

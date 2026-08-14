@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 
 namespace SecureClicker.Authentication;
-
-public class AuthenticationService
+public class UserAuthenticationService
 {
     private static readonly PasswordHasher<IdentityUser> _hasher = new();
 

@@ -5,11 +5,11 @@ using SecureClicker.Data.Models;
 
 namespace SecureClicker.Data;
 
-public class ApplicationModelConfiguration : IEntityTypeConfiguration<ProfileApplicationData> 
+public class ApplicationModelConfiguration
+    : IEntityTypeConfiguration<ProfileApplicationData>
 {
-    public void Configure(EntityTypeBuilder<ProfileApplicationData> builder) 
+    public void Configure(EntityTypeBuilder<ProfileApplicationData> builder)
     {
-        // Configure here 
         builder.HasKey(x => x.Id);
 
         builder.HasOne<IdentityUser>()

@@ -1,11 +1,11 @@
 @page
-@model SecureClicker.Pages.Authentication.SignUp
+@model SecureClicker.Pages.Authentication.Login
 
-<h1>Sign Up</h1>
-
-<div asp-validation-summary="All"></div>
+<h1>Login</h1>
 
 <form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+
     <div>
         <label asp-for="Username">Username</label>
         <input asp-for="Username" />
@@ -16,5 +16,8 @@
         <input asp-for="Password" type="password" />
     </div>
 
-    <button type="submit">Sign Up</button>
+    <button type="submit">Login</button>
+</form>
+<form method="post" asp-page="/Authentication/Logout">
+    <button type="submit">Logout</button>
 </form>
